@@ -1,0 +1,4 @@
+*.dat
+results/
+results2/plots
+!results2/plots/test.txt
