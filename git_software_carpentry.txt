@@ -1,0 +1,166 @@
+    1  ssh-keygen
+    2  cat ~/.ssh/id_rsa.pub 
+    3  git clone git@ssh.dev.azure.com:v3/swansea-university/IT/student-portal
+    4  #! /bin/sh
+    5  #
+    6  # Licensed to the Apache Software Foundation (ASF) under one or more
+    7  # contributor license agreements.  See the NOTICE file distributed with
+    8  # this work for additional information regarding copyright ownership.
+    9  # The ASF licenses this file to you under the Apache License, Version 2.0
+   10  # (the "License"); you may not use this file except in compliance with
+   11  # the License.  You may obtain a copy of the License at
+   12  #
+   13  # http://www.apache.org/licenses/LICENSE-2.0
+   14  #
+   15  # Unless required by applicable law or agreed to in writing, software
+   16  # distributed under the License is distributed on an "AS IS" BASIS,
+   17  # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   18  # See the License for the specific language governing permissions and
+   19  # limitations under the License.
+   20  #
+   21  ## This is a simple wrapper for the script bin/jmeter
+   22  ##
+   23  ## Basic JMeter startup script for Un*x systems
+   24  ## See the "jmeter" script for details of options that can be used for Sun JVMs
+   25  ##   ==============================================
+   26  ##   Environment variables:
+   27  ##   JVM_ARGS - optional java args, e.g. -Dprop=val
+   28  ##
+   29  ##   e.g.
+   30  ##   JVM_ARGS="-Xms512m -Xmx512m" jmeter.sh etc.
+   31  ##
+   32  ##   ==============================================
+   33  # resolve links - $0 may be a softlink (code as used by Tomcat)
+   34  # N.B. readlink would be a lot simpler but is not supported on Solaris
+   35  PRG="$0"
+   36  while [ -h "$PRG" ]; do   ls=`ls -ld "$PRG"`;   link=`expr "$ls" : '.*-> \(.*\)$'`;   if expr "$link" : '/.*' > /dev/null; then     PRG="$link";   else     PRG=`dirname "$PRG"`/"$link";   fi; done
+   37  PRGDIR=`dirname "$PRG"`
+   38  # Make sure prerequisite environment variables are set
+   39  if [ -z "$JAVA_HOME" -a -z "$JRE_HOME" ]; then   if [ "`uname`" = "Darwin" ]; then     if [ -x '/usr/libexec/java_home' ] ; then       export JAVA_HOME=`/usr/libexec/java_home`     elif [ -d "/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home" ]; then       export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home";     fi;   else     JAVA_PATH=`which java 2>/dev/null`;     if [ "x$JAVA_PATH" != "x" ]; then       JAVA_PATH=`dirname "$JAVA_PATH" 2>/dev/null`;       JRE_HOME=`dirname "$JAVA_PATH" 2>/dev/null`;     fi;     if [ "x$JRE_HOME" = "x" ]; then       if [ -x /usr/bin/java ]; then         JRE_HOME=/usr;       fi;     fi;   fi;   if [ -z "$JAVA_HOME" -a -z "$JRE_HOME" ]; then     echo "Neither the JAVA_HOME nor the JRE_HOME environment variable is defined";     echo "At least one of these environment variable is needed to run this program";     exit 1;   fi; fi
+   40  if [ -z "$JAVA_HOME" -a "$1" = "debug" ]; then   echo "JAVA_HOME should point to a JDK in order to run in debug mode.";   exit 1; fi
+   41  if [ -z "$JRE_HOME" ]; then   JRE_HOME="$JAVA_HOME"; fi
+   42  if [ -z "$JAVA_HOME" ]; then   JAVA_HOME="$JRE_HOME"; fi
+   43  #--add-opens if JAVA 9
+   44  JAVA9_OPTS=
+   45  # Minimal version to run JMeter
+   46  MINIMAL_VERSION=8
+   47  # Check if version is from OpenJDK or Oracle Hotspot JVM prior to 9 containing 1.${version}.x
+   48  CURRENT_VERSION=`"${JAVA_HOME}/bin/java" -version 2>&1 | awk -F'"' '/version/ {gsub("^1[.]", "", $2); gsub("[^0-9].*$", "", $2); print $2}'`
+   49  # Check if Java is present and the minimal version requirement
+   50  if [ "$CURRENT_VERSION" -gt "$MINIMAL_VERSION" ]; then     JAVA9_OPTS="--add-opens java.desktop/sun.awt=ALL-UNNAMED --add-opens java.desktop/sun.swing=ALL-UNNAMED --add-opens java.desktop/javax.swing.text.html=ALL-UNNAMED --add-opens java.desktop/java.awt=ALL-UNNAMED --add-opens java.desktop/java.awt.font=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.invoke=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.text=ALL-UNNAMED --add-opens=java.desktop/sun.awt.X11=ALL-UNNAMED --add-opens=java.desktop/sun.awt.shell=ALL-UNNAMED"; fi
+   51  # Don't add additional arguments to the JVM start, except those needed for Java 9
+   52  JMETER_COMPLETE_ARGS=true
+   53  # add the Java9 args before the user given ones
+   54  JVM_ARGS="$JAVA9_OPTS $JVM_ARGS"
+   55  export JVM_ARGS JMETER_COMPLETE_ARGS
+   56  "${PRGDIR}/jmeter" "$@"
+   57  python --version
+   58  ~ % which python
+   59  cd 'OneDrive - Swansea University'/
+   60  cd Desktop
+   61  cd swc-python/
+   62  ls
+   63  ls code
+   64  % ls code
+   65  cd..
+   66  cd ..
+   67  swc-python -l code
+   68  cd swc-python/
+   69  ls
+   70  python code/readings_04.py
+   71  ls
+   72  code ls
+   73  /code ls
+   74  code/ ls
+   75  cd code
+   76  ls
+   77  ls
+   78  python readings_04.py
+   79  ls
+   80  code % nano my_ls2.py
+   81  nano my_l2s.py
+   82  cat my_ls2.py 
+   83  nano my_l2s.py
+   84  cat my_ls2.py
+   85  nano my_l2s.py
+   86  cat my_ls2.py
+   87  nano my_l2s.py
+   88  cat my_ls2.py
+   89  cat my_l2s.py 
+   90  cat my_ls2.py
+   91  cat my_l2s.py 
+   92  history > software-carpentry-history.txt
+   93  cd ..
+   94  cd..
+   95  cd ..
+   96  git -v
+   97  git --version
+   98  mkdir 2023-07-20-git-novice
+   99  cd 2023-07-20-git-novice/
+  100  .
+  101  explorer.exe
+  102  explorer.exe .
+  103  git config --global user.name "Stephen Beale"
+  104  git config --global user.email "s.j.beale@swansea.ac.uk"
+  105  git config --global core.autocrlf false
+  106  git config --global core.editor "nano -w"
+  107  git config --global init.defaultBranch main
+  108  git config --global --edit
+  109  history > git_software_carpentry.txt
+  110  git -h
+  111  git config --help
+  112  git config --help
+  113  git config -h
+  114  git config --help
+  115  git config -h
+  116  git config --help
+  117  git --help
+  118  mkdir planets
+  119  explorer.exe .
+  120  ls -a
+  121  history > git_software_carpentry.txt
+  122  git statys
+  123  git status
+  124  cd planets/
+  125  ls
+  126  git init
+  127  ls
+  128  git status
+  129  git checkout -b main
+  130  git status 
+  131  pwd
+  132  ls -a
+  133  nano mars.txt
+  134  cat mars.txt 
+  135  ls
+  136  git status
+  137  git checkout -b main
+  138  git status
+  139  git add mars.txt
+  140  git status
+  141  git commit -m "Start notes on Mars as a base"
+  142  git status
+  143  git status
+  144  git log
+  145  nano mars.txt
+  146  cat mars.txt 
+  147  git status
+  148  git diff
+  149  git add mars.txt 
+  150  git status 
+  151  git commit -m "Add concerns about effects of Mars' moons on Wolfman"
+  152  git status 
+  153  nano mars.txt
+  154  cat mars.txt 
+  155  git status
+  156  git diff
+  157  git commit -m "Discuss concerns about Mars' climate for Mummy"
+  158  git add mars.txt 
+  159  git diff
+  160  git diff --staged
+  161  git commit -m "Discuss concerns about Mars' climate for Mummy"
+  162  git status 
+  163  git log
+  164  git --help
+  165  git log -2
+  166  history > git_software_carpentry.txt
